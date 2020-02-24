@@ -1,5 +1,5 @@
 from distutils.version import StrictVersion
-from datetime import datetime
+from datetime import datetime, timedelta
 from jinja2 import Markup
 from flask import current_app
 
@@ -153,6 +153,9 @@ $(document).ready(function() {
 
     def unix(self, refresh=False):
         return self._render("unix()", refresh)
+    
+    def add(self, value, mode):
+        return current_app.extensions['moment'](self.timestamp + timedelta(**{mode: value}))
 
 
 class Moment(object):
